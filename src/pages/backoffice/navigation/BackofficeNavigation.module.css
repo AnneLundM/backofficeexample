@@ -1,0 +1,21 @@
+.backofficeNavigation {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background-color: #2a4f5711;
+  li {
+    list-style: none;
+    font-size: 30px;
+  }
+}
+
+.backofficeNavigation a {
+  padding: 20px;
+  text-decoration: none;
+  font-weight: 600;
+  color: black;
+
+  &.active {
+    background-color: #2a4f5756;
+  }
+}
