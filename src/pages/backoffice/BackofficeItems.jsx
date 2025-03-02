@@ -2,9 +2,11 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import Button from "../../components/button/Button";
 import { useFetch } from "../../components/hooks/useFetch";
+import { useAlert } from "../../context/alertContext";
 const BackofficeActivities = () => {
   const { activities, deleteActivity, refetch } = useFetch();
   const navigate = useNavigate();
+  const { showError, showConfirmation } = useAlert();
 
   const handleAddActivity = () => {
     navigate("/activities/add");
@@ -12,6 +14,15 @@ const BackofficeActivities = () => {
 
   const handleEdit = (activityId) => {
     navigate(`/activities/edit/${activityId}`);
+  };
+
+  const handleConfirmation = (activityId) => {
+    showConfirmation(
+      "Du er ved at slette denne aktivitet",
+      "Er du sikker?",
+      () => deleteActivity(activityId),
+      () => showError("Sletning annulleret.")
+    );
   };
 
   console.log(activities);
@@ -42,7 +53,7 @@ const BackofficeActivities = () => {
                 <Button
                   buttonText='Slet'
                   background='red'
-                  onClick={() => deleteActivity(activity._id)}
+                  onClick={() => handleConfirmation(activity._id)}
                 />
                 <Button
                   buttonText='Redigér'
