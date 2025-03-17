@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useAuthContext } from "../../context/useAuthContext";
 
-const useFetch = () => {
+const useFetchActivities = () => {
   const [activities, setActivities] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -128,4 +128,4 @@ const useFetch = () => {
   };
 };
 
-export { useFetch };
+export { useFetchActivities };

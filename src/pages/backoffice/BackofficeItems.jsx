@@ -1,10 +1,11 @@
 // ACTIVITIES
 import { Outlet, useNavigate } from "react-router-dom";
 import Button from "../../components/button/Button";
-import { useFetch } from "../../components/hooks/useFetch";
+import { useFetchActivities } from "../../components/hooks/useFetchActivities";
 import { useAlert } from "../../context/alertContext";
+import { useFetchReviews } from "../../components/hooks/useFetchReviews";
 const BackofficeActivities = () => {
-  const { activities, deleteActivity, refetch } = useFetch();
+  const { activities, deleteActivity, refetch } = useFetchActivities();
   const navigate = useNavigate();
   const { showError, showConfirmation } = useAlert();
 
@@ -82,4 +83,69 @@ const BackofficeActivities = () => {
 
 // REVIEWS
 
-export { BackofficeActivities };
+const BackofficeReviews = () => {
+  const { reviews, deleteReview, refetch } = useFetchReviews();
+  const navigate = useNavigate();
+  const { showError, showConfirmation } = useAlert();
+
+  const handleAddActivity = () => {
+    navigate("/reviews/add");
+  };
+
+  const handleEdit = (activityId) => {
+    navigate(`/reviews/edit/${activityId}`);
+  };
+
+  const handleConfirmation = (reviewId) => {
+    showConfirmation(
+      "Du er ved at slette denne udtalelse",
+      "Er du sikker?",
+      () => deleteReview(reviewId),
+      () => showError("Sletning annulleret.")
+    );
+  };
+  return (
+    <article>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Review</th>
+            <th>Stay</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {reviews?.map((review) => (
+            <tr key={review._id} className='backofficeItem'>
+              <td>{review.name}</td>
+              <td>{review.age}</td>
+              <td>{review.review}</td>
+              <td>{review.stay}</td>
+              <td className='buttons'>
+                <Button
+                  buttonText='Slet'
+                  background='red'
+                  onClick={() => handleConfirmation(review._id)}
+                />
+              </td>
+            </tr>
+          ))}
+          <tr>
+            <td>
+              <Button
+                buttonText='Tilføj udtalelse'
+                background='green'
+                onClick={() => handleAddActivity()}
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <Outlet context={{ refetch }} />
+    </article>
+  );
+};
+
+export { BackofficeActivities, BackofficeReviews };

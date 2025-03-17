@@ -4,8 +4,12 @@ import { useRoutes } from "react-router-dom";
 import Login from "./components/login/Login";
 import Footer from "./components/footer/Footer";
 import { useAuthContext } from "./context/useAuthContext";
-import { BackofficeActivities } from "./pages/backoffice/BackofficeItems";
+import {
+  BackofficeActivities,
+  BackofficeReviews,
+} from "./pages/backoffice/BackofficeItems";
 import ActivityForm from "./pages/backoffice/forms/ActivityForm";
+import ReviewForm from "./pages/backoffice/forms/ReviewForm";
 
 function App() {
   const { signedIn } = useAuthContext();
@@ -30,6 +34,16 @@ function App() {
             {
               path: "edit/:id",
               element: <ActivityForm isEditMode={true} />,
+            },
+          ],
+        },
+        {
+          path: "reviews",
+          element: <BackofficeReviews />,
+          children: [
+            {
+              path: "add",
+              element: <ReviewForm />,
             },
           ],
         },

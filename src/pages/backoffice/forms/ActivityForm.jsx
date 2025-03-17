@@ -1,7 +1,7 @@
 // ACTIVITYFORM
 import { useEffect, useState } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
-import { useFetch } from "../../../components/hooks/useFetch";
+import { useFetchActivities } from "../../../components/hooks/useFetchActivities";
 import styles from "./form.module.css";
 import Button from "../../../components/button/Button";
 
@@ -18,7 +18,7 @@ const ActivityForm = ({ isEditMode }) => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { createActivity, isLoading, fetchActivityById, updateActivity } =
-    useFetch();
+    useFetchActivities();
 
   // Hent review hvis editMode er true
   useEffect(() => {
