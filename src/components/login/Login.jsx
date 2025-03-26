@@ -26,7 +26,6 @@ const Login = () => {
             className={styles.input}
             type='email'
             placeholder='Email'
-            defaultValue='admin@mediacollege.dk'
             onChange={(e) => setEmail(e.target.value)}
             required
           />
@@ -34,7 +33,6 @@ const Login = () => {
             className={styles.input}
             type='password'
             placeholder='Password'
-            defaultValue='admin'
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
